@@ -10,6 +10,9 @@ ALLEGRO_DISPLAY* display = NULL;
 ALLEGRO_SAMPLE *song=NULL;
 ALLEGRO_SAMPLE_INSTANCE *sample_instance;
 
+ALLEGRO_SAMPLE *sample1 = NULL;
+ALLEGRO_SAMPLE_INSTANCE *bmusic;
+
 int Game_establish() {
     int msg = 0;
     game_init();
@@ -71,6 +74,13 @@ void game_begin() {
     al_play_sample_instance(sample_instance);
     al_start_timer(fps);
     // initialize the menu before entering the loop
+
+    sample1 = al_load_sample("./sound/bmusic.wav");
+    bmusic = al_create_sample_instance(sample1);
+    al_set_sample_instance_playmode(bmusic, ALLEGRO_PLAYMODE_ONCE);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(bmusic, al_get_default_mixer());
+
     menu_init();
 
 }
@@ -83,13 +93,15 @@ void game_update(){
         if(window == 1 && next_window != 1){ // 一開始 window = 1, next_window = 1 => GUIDENCE
             al_stop_sample_instance(sample_instance);
         }else if(window == 2 && next_window != 0){
-            al_stop_sample_instance(sample_instance);
+            // al_stop_sample_instance(sample_instance);
             game_scene_destroy2();
         }else if(window == 8 && next_window == 0){ // 在TOOL頁面，然後要進入MENU
             judge_next_window = false;
             window = 1; // Menu
         }else if(window == 8 && next_window == 2){ // => 在TOOL頁面，然後要進入start
+            al_stop_sample_instance(sample_instance);
             game_scene_init(); // 這要要改成要進入的畫面的設定
+            al_play_sample_instance(bmusic);
             judge_next_window = false;
             window = 3;
         }
@@ -108,8 +120,7 @@ void game_update(){
             game_scene_init(); // 這要要改成要進入的畫面的設定
             judge_next_window = false;
             window = 3;
-        }
-        else if( next_window == 3){ //
+        }else if( next_window == 3){ //
             game_scene_init();
             judge_next_window = false;
             window = 4;
@@ -133,6 +144,8 @@ void game_update(){
 
     }
     if(window == 3||window == 4||window == 5){
+        al_stop_sample_instance(sample_instance);
+        al_play_sample_instance(bmusic);
         charater_update();
     }
 }
