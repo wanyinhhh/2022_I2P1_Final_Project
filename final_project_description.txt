@@ -1,0 +1,40 @@
+## Menu
+	- guidance
+	- start
+	- level
+	- infinite mode: infinite life
+	- setting: open close sound, sound management
+	- exit
+
+## basic 
+	- restart
+	- level
+	- skill: 藥水 and 道具
+	- blood
+
+## basic unit
+	- monster
+	- mouse (user control)
+
+## grading 
+	blood: 1 life=10 HP
+	time: 1 min
+	grade: finish time
+	道具
+
+## key
+	A: left D: right space: jump
+	R,F: 道具使用
+
+## 關卡
+	- 第一關：障礙物*1-2、技能*1-2、陷阱*1
+    - 第二關：增加陷阱跟障礙物、原本固定的跳板改成移動跳板、增加炸彈
+	- 第三關：增加陷阱、增加炸彈跟怪物、增加移動跳板
+
+
+## chara
+	- function: 
+		bound 
+		move left or right
+		trigger
+		use tool
